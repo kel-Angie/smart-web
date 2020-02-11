@@ -3,6 +3,7 @@ package com.smart.framework.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
@@ -55,4 +56,25 @@ public class ReflectionUtil {
         }
         return result;
     }
+
+    /**
+     * @description: 设置属性
+     * @author L.J.R
+     * @date 2019/12/24 17:28
+     * @param obj
+     * @param field
+     * @param value
+     * @return void
+     */
+    public static void setField(Object obj, Field field, Object value){
+        field.setAccessible(true);
+        try {
+            field.set(obj, value);
+        }catch (Exception e){
+            logger.info("set filed failure!",e);
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
